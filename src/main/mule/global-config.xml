@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="8794bc19-a198-4c54-b7f3-4e452f785182" file="properties\dev.yaml" />
+	<api-gateway:autodiscovery apiId="1234567" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="83800408-afa6-41dc-9d95-981ac1092ac1" flowRef="orders-sys-api-main"/>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2bcbfec3-6668-4096-a026-f651613e011f" >
+		<http:listener-connection host="${listener.host}" port="${listener.port}" readTimeout="${listener.readtimeout}"/>
+	</http:listener-config>
+	<apikit:config name="orders-sys-api-config" api="resource::19b02f37-b2a2-42ca-b257-5e31f0863d4c:orders-sys-api:1.0.1:raml:zip:orders-sys-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="55b59b4e-4dea-4421-8914-ace0f3cfdd33" >
+		<db:my-sql-connection host="${database.host}" port="${database.port}" user="sql12827772" database="sql12827772" password="UcEsEmUhNG"/>
+	</db:config>
+</mule>
